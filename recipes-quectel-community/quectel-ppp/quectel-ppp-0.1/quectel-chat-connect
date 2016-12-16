@@ -1,0 +1,21 @@
+ABORT "BUSY"
+ABORT "NO CARRIER"
+ABORT "NO DIALTONE"
+ABORT "ERROR"
+ABORT "NO ANSWER"
+TIMEOUT 120
+"" AT
+OK ATE0
+OK ATI
+OK AT+CSQ
+OK AT+CPIN?
+OK AT+COPS?
+OK AT+CGREG?
+OK ATZ
+# Connection to the network
+# Example given below is for O2 in UK. 
+# Check with service provider for required details
+OK AT+CGDCONT=1,"IP","mobile.o2.co.uk",,0,0
+# Dial the number
+OK ATDT*99#
+CONNECT

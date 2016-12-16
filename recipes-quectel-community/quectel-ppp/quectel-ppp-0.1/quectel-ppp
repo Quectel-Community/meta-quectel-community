@@ -1,0 +1,46 @@
+#/etc/ppp/peers/quectel-ppp
+# Usage:root>pppd call quectel-ppp
+# Hide password in debug messages
+hide-password
+# The phone is not required to authenticate
+noauth
+# The chat script (be sure to edit that file,too!)
+connect '/usr/sbin/chat -s -v -f /etc/ppp/peers/quectel-chat-connect'
+# The close script(be sure to edit that file,too!)
+disconnect '/usr/sbin/chat -s -v -f /etc/ppp/peers/quectel-chat-disconnect'
+# Debug info from pppd
+debug
+# Serial Device to which the HSPDA phone is connected
+# Modem path, like /dev/ttyUSB3,/dev/ttyACM0, it depends on your module.
+# Exmaple given is with the modem mounted at /dev/ttyUSB3
+/dev/ttyUSB3
+# Serial port line speed
+115200
+# If you want to use the HSDPA link as your gateway
+defaultroute
+# pppd must not propose any IP address to the peer
+noipdefault
+# No ppp compression
+novj
+novjccomp
+noccp
+ipcp-accept-local
+ipcp-accept-remote
+local
+# For sanity, keep a lock on the serial line
+lock
+dump
+# Keep pppd attached to the terminal
+# Comment this to get daemon mode pppd
+nodetach
+# Network access credenatials. 
+# Example given below is for O2 in UK. 
+# Check with service provider for required details
+user o2dd
+password password
+# Hardware flow control
+crtscts
+remotename 3gppp
+ipparam 3gppp
+# Ask the peer for up to 2 DNS server addresses
+usepeerdns

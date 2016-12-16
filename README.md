@@ -28,6 +28,7 @@ Repository: https://github.com/Quectel-Community/meta-quectel-community
 
   I. Adding the quectel-community layer to your build
  II. About This Layer
+III. Using the PPPd scripts
 
 # I. Adding the quectel-community layer to your build
 
@@ -58,8 +59,22 @@ hardware:
 Once the Linux Kernel adds support for a module it can be removed from 
 this layer.
 
+This layer also adds a set of three Point-to-Point Protocol daemon 
+scripts which allow the use of a `pppd call questel-ppp` command.  Both 
+these scripts and the kernel modifications are based on instructions 
+provided by the Quectel WCDMA&LTE Linux USB Driver User Guide.
+
 This layer is not produced or supported by Quectel.  It is developed by
 users of Quectel hardware who wish to add support to Yocto systems.
 Initally the development focuses on supporting the hardware under a 
 Raspberry Pi 3.
 
+# Using the PPPd scripts
+
+Once your Quectel hardware is connected and the appropreate USB driver 
+is associated with it you can initiate a call with: 
+
+  pppd call quectel-ppp
+
+Before using the script you may need to set the appopreate user and
+password for your network connection.
