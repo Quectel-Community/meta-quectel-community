@@ -26,11 +26,11 @@ Repository: https://github.com/Quectel-Community/meta-quectel-community
 
 ## Table of Contents
 
-  I. Adding the quectel-community layer to your build
- II. About This Layer
-III. Using the PPPd scripts
+1. Adding the quectel-community layer to your build
+2. About This Layer
+3. Using the PPPd scripts
 
-# I. Adding the quectel-community layer to your build
+# 1. Adding the quectel-community layer to your build
 
 In order to use this layer, you need to make the build system aware of
 it.
@@ -49,7 +49,7 @@ BBLAYERS ?= " \
   "
 ```
 
-# II. About This Layer
+# 2. About This Layer
 
 This layer adds kernel modifications to support the following Quectel 
 hardware: 
@@ -69,7 +69,7 @@ users of Quectel hardware who wish to add support to Yocto systems.
 Initally the development focuses on supporting the hardware under a 
 Raspberry Pi 3.
 
-# Using the PPPd scripts
+# 3. Using the PPPd scripts
 
 Once your Quectel hardware is connected and the appropreate USB driver 
 is associated with it you can initiate a call with: 
