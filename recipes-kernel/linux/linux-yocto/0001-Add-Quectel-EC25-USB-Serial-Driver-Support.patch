@@ -1,0 +1,72 @@
+From 8126a05642c6481acadcfd927712450e7afdef40 Mon Sep 17 00:00:00 2001
+From: Thomas Thorne <Thomas.Thorne@Net2Edge.com>
+Date: Thu, 10 Nov 2016 15:30:21 +0000
+Subject: [PATCH] Add Quectel EC25 USB Serial Driver Support
+
+Adds USB Serial Driver support for the Quectel EC25 LTE module.  This
+patch is based on instructions by Quectel's WCDMA&LTE Linux USB
+Driver User Guide, rev. WCDMA&LTE_Linux_USB_Driver_User_Guide_V1.5 and
+has been published with their permission.
+
+The Quectel EC25 has a similar interface to the Quectel UC20 which is
+already supported in this version of the kernel.
+
+Signed-off-by: Thomas Thorne <Thomas.Thorne@Net2Edge.com>
+---
+ drivers/usb/serial/option.c   | 8 ++++++++
+ drivers/usb/serial/usb_wwan.c | 6 ++++++
+ 2 files changed, 14 insertions(+)
+
+diff --git a/drivers/usb/serial/option.c b/drivers/usb/serial/option.c
+index 9894e34..4cd8069 100644
+--- a/drivers/usb/serial/option.c
++++ b/drivers/usb/serial/option.c
+@@ -1161,6 +1161,8 @@ static const struct usb_device_id option_ids[] = {
+ 	{ USB_DEVICE(QUALCOMM_VENDOR_ID, 0x9000)}, /* SIMCom SIM5218 */
+ 	{ USB_DEVICE(QUALCOMM_VENDOR_ID, 0x9003), /* Quectel UC20 */
+ 	  .driver_info = (kernel_ulong_t)&net_intf4_blacklist },
++	{ USB_DEVICE(0x2c7c, 0x0125), /* Quectel EC25 */
++	  .driver_info = (kernel_ulong_t)&net_intf4_blacklist },
+ 	{ USB_DEVICE(CMOTECH_VENDOR_ID, CMOTECH_PRODUCT_6001) },
+ 	{ USB_DEVICE(CMOTECH_VENDOR_ID, CMOTECH_PRODUCT_CMU_300) },
+ 	{ USB_DEVICE(CMOTECH_VENDOR_ID, CMOTECH_PRODUCT_6003),
+@@ -2034,6 +2036,7 @@ static struct usb_serial_driver option_1port_device = {
+ #ifdef CONFIG_PM
+ 	.suspend           = usb_wwan_suspend,
+ 	.resume            = usb_wwan_resume,
++	.reset_resume      = usb_wwan_resume,
+ #endif
+ };
+ 
+@@ -2073,6 +2076,11 @@ static int option_probe(struct usb_serial *serial,
+ 	    iface_desc->bInterfaceClass != USB_CLASS_CDC_DATA)
+ 		return -ENODEV;
+ 
++	/* Quectel EC25's interface 4 can be used as USB Network device */
++	if (serial->dev->descriptor.idVendor == cpu_to_le16(0x2c7c) &&
++		serial->interface->cur_altsetting->desc.bInterfaceNumber >= 4)
++		return -ENODEV;
++
+ 	/* Store the blacklist info so we can use it during attach. */
+ 	usb_set_serial_data(serial, (void *)blacklist);
+ 
+diff --git a/drivers/usb/serial/usb_wwan.c b/drivers/usb/serial/usb_wwan.c
+index be9cb61..b1eb3bb 100644
+--- a/drivers/usb/serial/usb_wwan.c
++++ b/drivers/usb/serial/usb_wwan.c
+@@ -505,6 +505,12 @@ static struct urb *usb_wwan_setup_urb(struct usb_serial_port *port,
+ 			  usb_sndbulkpipe(serial->dev, endpoint) | dir,
+ 			  buf, len, callback, ctx);
+ 
++	if (dir == USB_DIR_OUT) {
++		struct usb_device_descriptor *desc = &serial->dev->descriptor;
++		if (desc->idVendor == cpu_to_le16(0x2c7c))
++			urb->transfer_flags |= URB_ZERO_PACKET;
++	}
++
+ 	return urb;
+ }
+ 
+-- 
+2.7.4
+
