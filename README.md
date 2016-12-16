@@ -9,13 +9,12 @@ Please see the sections below for details.
 
 This layer depends on:
 
-  URI: git://git.openembedded.org/bitbake
-  branch: master
+ URI: git://git.openembedded.org/bitbake
+ branch: master
 
-  URI: git://git.openembedded.org/openembedded-core
-  layers: meta
-  branch: master
-
+ URI: git://git.openembedded.org/openembedded-core
+ layers: meta
+ branch: master
 
 ## Patches
 
@@ -74,7 +73,9 @@ Raspberry Pi 3.
 Once your Quectel hardware is connected and the appropreate USB driver 
 is associated with it you can initiate a call with: 
 
-  pppd call quectel-ppp
+```
+pppd call quectel-ppp
+```
 
 Before using the script you may need to set the appopreate user and
 password for your network connection.
