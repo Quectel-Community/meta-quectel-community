@@ -2,4 +2,4 @@ ABORT "ERROR"
 ABORT "NO DIALTONE"
 SAY "\NSending break to the modem\n"
 "" +++ATH
-SAY "\nGood bye\n
+SAY "\nGood bye\n"
