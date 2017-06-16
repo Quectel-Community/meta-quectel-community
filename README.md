@@ -74,8 +74,11 @@ Once your Quectel hardware is connected and the appropreate USB driver
 is associated with it you can initiate a call with: 
 
 ```
-pppd call quectel-ppp
+pppd -E call quectel-ppp
 ```
 
-Before using the script you may need to set the appopreate user and
-password for your network connection.
+Before using the script you will need to set the appropriate Access
+Point Name (APN), Username and Password for your LTE network
+connection.  To do this set `LTE_APN`, `LTE_USERNAME` and
+`LTE_PASSWORD` environment variables before calling the pppd script
+with the `-E` option.

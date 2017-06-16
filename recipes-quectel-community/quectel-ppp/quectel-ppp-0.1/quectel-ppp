@@ -34,10 +34,10 @@ dump
 # Comment this to get daemon mode pppd
 nodetach
 # Network access credenatials. 
-# Example given below is for O2 in UK. 
+# Set LTE_USERNAME and LTE_PASSWORD before executing pppd -C call
 # Check with service provider for required details
-user o2dd
-password password
+user $LTE_USERNAME
+password $LTE_PASSWORD
 # Hardware flow control
 crtscts
 remotename 3gppp

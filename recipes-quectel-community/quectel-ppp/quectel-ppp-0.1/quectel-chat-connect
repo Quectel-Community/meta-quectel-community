@@ -13,9 +13,9 @@ OK AT+COPS?
 OK AT+CGREG?
 OK ATZ
 # Connection to the network
-# Example given below is for O2 in UK. 
+# Set LTE_VPN variable before executing pppd -E call
 # Check with service provider for required details
-OK AT+CGDCONT=1,"IP","mobile.o2.co.uk",,0,0
+OK AT+CGDCONT=1,"IP","$LTE_VPN",,0,0
 # Dial the number
 OK ATDT*99#
 CONNECT
