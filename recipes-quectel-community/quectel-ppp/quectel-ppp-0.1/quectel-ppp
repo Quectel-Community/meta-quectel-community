@@ -4,10 +4,10 @@
 hide-password
 # The phone is not required to authenticate
 noauth
-# The chat script (be sure to edit that file,too!)
-connect '/usr/sbin/chat -s -v -f /etc/ppp/peers/quectel-chat-connect'
-# The close script(be sure to edit that file,too!)
-disconnect '/usr/sbin/chat -s -v -f /etc/ppp/peers/quectel-chat-disconnect'
+# The chat script
+connect '/usr/sbin/chat -E -s -v -f /etc/ppp/peers/quectel-chat-connect'
+# The close script
+disconnect '/usr/sbin/chat -E -s -v -f /etc/ppp/peers/quectel-chat-disconnect'
 # Debug info from pppd
 debug
 # Serial Device to which the HSPDA phone is connected

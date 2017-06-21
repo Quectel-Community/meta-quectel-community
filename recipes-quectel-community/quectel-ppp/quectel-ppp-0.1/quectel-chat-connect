@@ -13,7 +13,7 @@ OK AT+COPS?
 OK AT+CGREG?
 OK ATZ
 # Connection to the network
-# Set LTE_VPN variable before executing pppd -E call
+# Set LTE_VPN variable before executing chat -E ...
 # Check with service provider for required details
 OK AT+CGDCONT=1,"IP","$LTE_VPN",,0,0
 # Dial the number
