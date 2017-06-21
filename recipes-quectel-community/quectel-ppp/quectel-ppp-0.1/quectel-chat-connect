@@ -13,9 +13,9 @@ OK AT+COPS?
 OK AT+CGREG?
 OK ATZ
 # Connection to the network
-# Set LTE_VPN variable before executing chat -E ...
+# Set LTE_APN variable before executing chat -E ...
 # Check with service provider for required details
-OK AT+CGDCONT=1,"IP","$LTE_VPN",,0,0
+OK AT+CGDCONT=1,"IP","$LTE_APN",,0,0
 # Dial the number
 OK ATDT*99#
 CONNECT
